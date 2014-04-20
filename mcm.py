@@ -10,9 +10,9 @@ def verificar(str_num_mc):
     i = 0
     while(i < size and str_num_mc[i]=='0'):
         i+=1
-        
+
     if i == size:
-        return 'caso exceptional'
+        return "excep"
     else:
         return numero/math.pow(10,size)
 
@@ -47,16 +47,16 @@ def num2numeros_medios(numero, num_digitos_pedidos):
 def prueba(num):
     print "%s\t%-10s\t\%s\t%s"%(num,
                         num*num,
-                        num2numeros_medios(num,str(num).__len__()), 
+                        num2numeros_medios(num,str(num).__len__()),
                         verificar(num2numeros_medios(num,str(num).__len__())) )
-   
+
 def prueba2(num,size):
     print "%s\t%-10s\t\%s\t%s"%(num,
                         num*num,
-                        num2numeros_medios(num,size), 
+                        num2numeros_medios(num,size),
                         verificar(num2numeros_medios(num,size)) )
-                        
-   
+
+
 #prueba(123)
 #prueba(999)
 prueba(1234)
@@ -67,22 +67,28 @@ prueba(111111)
 prueba(999999)
 prueba(2456)
 prueba(10000)
-prueba(5735)      
-prueba2(319,4)    
+prueba(5735)
+prueba2(319,4)
 #Metodo de los Cuadrados Medios
 
 def metodo_cuadrados_medios(semilla, cantidad, size_x):
     num = semilla
-    for i in range(cantidad):        
+    num_ant = 1001
+    for i in range(cantidad):
         prueba2(num,size_x)
         num = int(num2numeros_medios(num,size_x))
-#        if verificar(num2numeros_medios(num_ant,size_x)) == "caso exceptional":
-#            break
+        if verificar(num2numeros_medios(num_ant,size_x)) == "excep":
+            break
+        num_ant = num
 
 
-print "*********************************"        
+print "*********************************"
 metodo_cuadrados_medios(5735,10,4)
 print "*********************************"
 metodo_cuadrados_medios(1001,10,4)
 print "*********************************"
 metodo_cuadrados_medios(6634,10,4)
+print "*********************************"
+metodo_cuadrados_medios(66342,10,5)
+metodo_cuadrados_medios(1000,10,5)
+
