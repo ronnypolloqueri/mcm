@@ -17,33 +17,31 @@ def verificar(str_num_mc):
         return numero/math.pow(10,size)
 
 
-def num2numeros_medios(numero, size_x):
+def num2numeros_medios(numero, num_digitos_pedidos):
     cadena_split='error'
-    #size_x = str(numero).__len__()
-    x_size_is_par = (size_x%2==0)
+    size_numero = str(numero).__len__()
 
-    cadena = str(numero*numero)
-    size_y = cadena.__len__()
-
-    if x_size_is_par: # si size_x es par
-        if( size_y % 2 == 1): # yi es impar
-            cadena = '0' + cadena
-            cadena_split = cadena[((size_x/2)):-(size_x/2)]
-        else: # yi es par
-           # cadena_split = cadena[((size_x-1)/2):-((size_x-1)/2))]
-            cadena_split = cadena[((size_x/2)):-(size_x/2)]
-
-
-    else:   # si size_x es impar
-        if( size_y % 2 == 0): # si size y es par
-            cadena = '0' + cadena
-            cadena_split = cadena[((size_x+1)/2):-((size_x+1)/2)]
-
-        else: # yi es impar
-            cadena_split = cadena[((size_x-1)/2):-((size_x-1)/2)]
+    str_num_cuadrado = str(numero*numero)
+    p = (str(numero*numero).__len__() % 2 == 0)
+    q = (num_digitos_pedidos % 2 == 0)
+    # p <-> q
+    #print "============="
+    #print "P es: "+ str(p)
+    #print "Q es: "+ str(q)
+    #if ((not p) or q ) and ((not q) or p):
+       # print "ok"
+    #   pass
+    #else:
+    #print "numero de digitos p : %s" % num_digitos_pedidos
+    dif =  (2*num_digitos_pedidos) - str(numero*numero).__len__()
+    for i in range(dif):
+        str_num_cuadrado = '0'+ str_num_cuadrado
+    #print "cambio.. %s" % str_num_cuadrado
+    marca = (str_num_cuadrado.__len__() - num_digitos_pedidos)/2
+    #print "La marca: %s"%marca
+    cadena_split = str_num_cuadrado[marca:-marca]
 
     return cadena_split
-
 
 
 def prueba(num):
@@ -59,8 +57,8 @@ def prueba2(num,size):
                         verificar(num2numeros_medios(num,size)) )
                         
    
-prueba(123)
-prueba(999)
+#prueba(123)
+#prueba(999)
 prueba(1234)
 prueba(9999)
 prueba(11111)
@@ -74,21 +72,17 @@ prueba2(319,4)
 #Metodo de los Cuadrados Medios
 
 def metodo_cuadrados_medios(semilla, cantidad, size_x):
-    x = range(1,cantidad+1)
-    r = list()
-    for i in range(1,cantidad):
-        if i == 1:
-            print int(num2numeros_medios(semilla, size_x))
-           
-            x[i] = int(num2numeros_medios(semilla, size_x))
-            r.append( verificar(num2numeros_medios(semilla, size_x)) )
+    num = semilla
+    for i in range(cantidad):        
+        prueba2(num,size_x)
+        num = int(num2numeros_medios(num,size_x))
+#        if verificar(num2numeros_medios(num_ant,size_x)) == "caso exceptional":
+#            break
 
-        else:
-            print num2numeros_medios(x[i-1], size_x)
-            x[i] = int(num2numeros_medios(x[i-1], size_x))
-            r.append( verificar(num2numeros_medios(x[i-1], size_x)) )
 
-        print "%s"%r
-        
-        
+print "*********************************"        
 metodo_cuadrados_medios(5735,10,4)
+print "*********************************"
+metodo_cuadrados_medios(1001,10,4)
+print "*********************************"
+metodo_cuadrados_medios(6634,10,4)
